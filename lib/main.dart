@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:url_launcher_example/custom_button.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 void main() {
   runApp(const MyApp());
@@ -38,40 +40,83 @@ class MyHomePage extends StatelessWidget {
               spacing: 10,
               children: <Widget>[
                 TextButton(
-                  onPressed: () {},
-                  //style: TextButton.styleFrom(padding: const EdgeInsets.all(0)),
+                  onPressed: () async {
+                    const url = 'https://blog.logrocket.com';
+                    if (await canLaunch(url)) {
+                      await launch(url);
+                    } else {
+                      throw 'Could not launch $url';
+                    }
+                  },
                   child: const CustomWidget(
                     icon: Icons.language,
                     label: 'Open a URL',
                   ),
                 ),
                 TextButton(
-                  onPressed: () {},
-                  //style: TextButton.styleFrom(padding: const EdgeInsets.all(0)),
+                  onPressed: () async {
+                    String email = 'this.is.tijani@gmail.com';
+                    String subject = 'This is a test email';
+                    String body = 'This is a test email body';
+                    String emailUrl =
+                        "mailto:$email?subject=$subject&body=$body";
+
+                    if (await canLaunch(emailUrl)) {
+                      await launch(emailUrl);
+                    } else {
+                      throw "Can't phone that number.";
+                    }
+                  },
                   child: const CustomWidget(
                     icon: Icons.forward_to_inbox,
                     label: 'Send an email',
                   ),
                 ),
                 TextButton(
-                  onPressed: () {},
-                  //style: TextButton.styleFrom(padding: const EdgeInsets.all(0)),
+                  onPressed: () async {
+                    String telephoneNumber = '+2347012345678';
+                    String telephoneUrl = "tel:$telephoneNumber";
+
+                    if (await canLaunch(telephoneUrl)) {
+                      await launch(telephoneUrl);
+                    } else {
+                      throw "Error occured trying to call that number.";
+                    }
+                  },
                   child: const CustomWidget(
                     icon: Icons.call,
                     label: 'Call a phone\nnumber',
                   ),
                 ),
                 TextButton(
-                  onPressed: () {},
-                  //style: TextButton.styleFrom(padding: const EdgeInsets.all(0)),
+                  onPressed: () async {
+                    String telephoneNumber = '+2347012345678';
+                    String smsUrl = "sms:$telephoneNumber";
+
+                    if (await canLaunch(smsUrl)) {
+                      await launch(smsUrl);
+                    } else {
+                      throw "Error occured trying to send a message that number.";
+                    }
+                  },
                   child: const CustomWidget(
                     icon: Icons.textsms,
                     label: 'Send an SMS',
                   ),
                 ),
                 TextButton(
-                  onPressed: () {},
-                  //style: TextButton.styleFrom(padding: const EdgeInsets.all(0)),
+                  onPressed: () async {
+                    const String lat = "42.3540";
+                    const String lng = "71.0586";
+
+                    const String mapUrl = "geo:$lat,$lng";
+
+                    if (await canLaunch(mapUrl)) {
+                      await launch(mapUrl);
+                    } else {
+                      throw "Couldn't launch Map";
+                    }
+                  },
                   child: const CustomWidget(
                     icon: Icons.near_me,
                     label: 'Check location',
@@ -81,39 +126,5 @@ class MyHomePage extends StatelessWidget {
             ),
           ),
         ));
-  }
-}
-
-class CustomWidget extends StatelessWidget {
-  final IconData icon;
-  final String label;
-  const CustomWidget({
-    Key? key,
-    required this.label,
-    required this.icon,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      height: 120,
-      width: 120,
-      decoration: BoxDecoration(
-          color: Colors.blueGrey.shade100,
-          borderRadius: BorderRadius.circular(4.0)),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Icon(icon, size: 35, color: Colors.blueGrey.shade700),
-          Text(
-            label,
-            textAlign: TextAlign.center,
-            style: TextStyle(color: Colors.blueGrey.shade700),
-          )
-        ],
-      ),
-    );
   }
 }
