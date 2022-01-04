@@ -33,9 +33,9 @@ class MyHomePage extends StatelessWidget {
           child: Padding(
             padding: const EdgeInsets.all(20.0),
             child: Wrap(
-              crossAxisAlignment: WrapCrossAlignment.center,
-              alignment: WrapAlignment.center,
-              runAlignment: WrapAlignment.center,
+              // crossAxisAlignment: WrapCrossAlignment.center,
+              // alignment: WrapAlignment.center,
+              // runAlignment: WrapAlignment.center,
               runSpacing: 10,
               spacing: 10,
               children: <Widget>[
@@ -43,7 +43,7 @@ class MyHomePage extends StatelessWidget {
                   onPressed: () async {
                     const url = 'https://blog.logrocket.com';
                     if (await canLaunch(url)) {
-                      await launch(url);
+                      await launch(url, forceWebView: true);
                     } else {
                       throw 'Could not launch $url';
                     }
@@ -107,7 +107,7 @@ class MyHomePage extends StatelessWidget {
                 TextButton(
                   onPressed: () async {
                     const String lat = "42.3540";
-                    const String lng = "71.0586";
+                    const String lng = "-71.0586";
 
                     const String mapUrl = "geo:$lat,$lng";
 
