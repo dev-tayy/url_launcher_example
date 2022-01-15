@@ -55,7 +55,8 @@ class MyHomePage extends StatelessWidget {
                       String telephoneUrl = "tel:$telephoneNumber";
 
                       if (await canLaunch(telephoneUrl)) {
-                        await launch(telephoneUrl);
+                        await launch(telephoneUrl,
+                            statusBarBrightness: Brightness.dark);
                       } else {
                         throw "Error occured trying to call that number.";
                       }
@@ -164,9 +165,13 @@ class MyHomePage extends StatelessWidget {
                   ),
                   TextButton(
                     onPressed: () async {
-                      const url = 'https://blog.logrocket.com';
+                      const url = 'https://www.twitter.com';
                       if (await canLaunch(url)) {
-                        await launch(url, forceWebView: false);
+                        await launch(
+                          url,
+                          forceWebView: true,
+                          enableJavaScript: false,
+                        );
                       } else {
                         throw 'Could not launch $url';
                       }
@@ -179,7 +184,7 @@ class MyHomePage extends StatelessWidget {
                       children: const [
                         Icon(Icons.language, color: Color(0xFFED92A2)),
                         SizedBox(width: 20.0),
-                        Text('blog.logrocket.com',
+                        Text('Twitter',
                             style: TextStyle(
                                 color: Color(0xFFA294C2),
                                 fontSize: 16.0,
